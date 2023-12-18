@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Text, View, Button, StyleSheet } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
+import * as SecureStore from 'expo-secure-store';
+import 'react-native-get-random-values';
+import { v4 as uuidv4 } from 'uuid';
 
 const QRScanner = ({ navigation }) => {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
+  const [deviceId, setDeviceId] = useState(null); 
 
   useEffect(() => {
     const unsubscribe = navigation.addListener('focus', () => {
@@ -16,18 +20,33 @@ const QRScanner = ({ navigation }) => {
       setHasPermission(status === "granted"); 
       })();
     });
-
+    getDeviceId();
     // Return the function to unsubscribe from the event so it gets removed on unmount
     return unsubscribe;
+ 
   }, [navigation]);
 
+  const getDeviceId = async () => {
+    let uuid = uuidv4();
+    let fetchUUID = await SecureStore.getItemAsync("secure_deviceId");
+    //if user has already signed up prior
+    if (fetchUUID) {
+      uuid = fetchUUID;
+      setDeviceId(uuid);
+      console.log(uuid)
+      return;
+    }
+    await SecureStore.setItemAsync("secure_deviceId", JSON.stringify(uuid));
+    setDeviceId(uuid);
+    console.log(uuid)
+  };
 
   const handleBarCodeScanned = ({ type, data }) => {
     if (!scanned) {
       setScanned(true);
       // Handle QR code data and navigate to the next screen
       console.log("data", data);
-      navigation.navigate('VerifyDevice', { deviceId: data });
+      navigation.navigate('VerifyDevice', { deviceId: deviceId });
     }
   };
 

@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "AttendanceManagementSystem",
-    "slug": "AttendanceManagementSystem",
+    "name": "Attendance System",
+    "slug": "AttendanceSystem",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -26,16 +26,29 @@
       "supportsTablet": true,
       "entitlements": {
         "com.apple.developer.networking.wifi-info": true
+      },
+      "infoPlist": {
+        "NSCameraUsageDescription": "Allow $(PRODUCT_NAME) to access camera.",
+        "NSMicrophoneUsageDescription": "Allow $(PRODUCT_NAME) to access your microphone"
       }
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "permissions": [
+        "android.permission.CAMERA"
+      ],
+      "package": "com.nosheenqayyum.AttendanceSystem"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "83b98371-8db2-44c8-b9b9-6079d11a6136"
+      }
     }
   }
 }
