@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = 'http://172.16.172.170:9564'; // need to replace for prod
+const BASE_URL = 'http://172.16.172.123:9564'; // need to replace for prod
 
 export const verifyDevice = async (deviceId,macAddress) => {
   console.log("api data for verify device call in api.js",deviceId,macAddress)

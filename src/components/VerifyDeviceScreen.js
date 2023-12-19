@@ -10,6 +10,7 @@ const VerifyDeviceScreen = ({ navigation, route }) => {
   const [bssid, setBssid] = useState(null);
 
   const showResponseError = (error) => {
+    console.log(error,"in verify device")
     if (error.message === "Network Error") {
       return "Please check your network";
     } else {

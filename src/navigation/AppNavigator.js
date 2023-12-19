@@ -6,13 +6,15 @@ import QRScanner from '../components/QRScanner';
 import VerifyDeviceScreen from '../components/VerifyDeviceScreen';
 import VerifyEmailScreen from '../components/VerifyEmailScreen';
 import CheckInOutScreen from '../components/CheckInOutScreen';
+import WelcomeScreen from '../components/Welcome';
 
 const Stack = createStackNavigator();
 
 const AppNavigator = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="QRScanner">
+      <Stack.Navigator >
+      <Stack.Screen name="Greet" component={WelcomeScreen} />
         <Stack.Screen name="QRScanner" component={QRScanner} />
         <Stack.Screen name="VerifyDevice" component={VerifyDeviceScreen} />
         <Stack.Screen name="VerifyEmail" component={VerifyEmailScreen} />
